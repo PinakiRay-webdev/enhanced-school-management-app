@@ -2,13 +2,15 @@ import React , {useEffect, useState, useRef} from 'react'
 import { TbGridDots , TbDotsVertical , TbMessageChatbotFilled } from "react-icons/tb";
 import { IoNotifications } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
+import { toggleSideBar } from '../../redux/slice/SideBarSlice';
 
 import { useLocation,} from 'react-router-dom';
 import { toggleAddForm } from '../../redux/slice/AddFormSlice';
 
 const Navbar = () => {
 
+    const sidebarStatus = useSelector((state) => state.sidebar.isOpen)
     const dispatch = useDispatch()
     const[currentLocation , setCurrentLocation] = useState("")
 
@@ -25,13 +27,16 @@ const Navbar = () => {
         setCurrentLocation(site)
     },[site])
     
+    const toggleSideBarMenu = () =>{
+      dispatch(toggleSideBar())
+    }
 
   return (
-    <div className='bg-white pl-[10vw]' > 
+    <div className={`bg-white ${sidebarStatus ? "pl-[10vw]" : "pl-[5vw]"} transition-all duration-150 ease-in-out`} > 
       <div className='py-2 flex justify-between px-4' >
         {/* left side  */}
         <div className='flex items-center gap-4'>
-        <p><TbGridDots/></p>
+        <p onClick={toggleSideBarMenu} className='cursor-pointer' >{sidebarStatus ? <TbGridDots/> : <TbDotsVertical/>}</p>
         <p className='capitalize'>{currentLocation}</p>
         </div>
 
