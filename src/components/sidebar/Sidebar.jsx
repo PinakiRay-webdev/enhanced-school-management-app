@@ -1,6 +1,6 @@
 import React from "react";
 import { TbLogout } from "react-icons/tb";
-import { sidebar_nav_elements } from "../../../../../utils/utils";
+import  sidebar_nav_elements from '../../utils/utils'
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

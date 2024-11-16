@@ -1,9 +1,9 @@
 import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useSelector , useDispatch } from "react-redux";
-import { toggleAddForm } from "../../redux/slice/AddFormSlice";
+import { toggleAddForm } from "../../../../../redux/slice/AddFormSlice";
 import { useForm } from "react-hook-form";
-import { CreateMentor, createStudent } from "../../redux/slice/UserSlice";
+import { CreateMentor, createStudent} from '../../../../../redux/slice/UserSlice'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
