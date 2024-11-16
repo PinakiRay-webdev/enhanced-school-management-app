@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar/Sidebar'
 import AdminDashboard from './Pages/Users/Admin/Pages/Dashboard/AdminDashboard'
 import AddUsers from './Pages/Users/Admin/Components/Add Users/AddUsers'
 import StudentList from './Pages/Users/Admin/Pages/Student lists/StudentList'
+import TeacherList from './Pages/Users/Admin/Pages/Teacher Lists/TeacherList'
 const App = () => {
 
   const endPoints = createBrowserRouter([
@@ -27,6 +28,14 @@ const App = () => {
         <Navbar/>
         <Sidebar/>
         <StudentList/>
+      </>
+    },
+    {
+      path : '/admin/teachers',
+      element : <>
+        <Navbar/>
+        <Sidebar/>
+        <TeacherList/>
       </>
     }
   ])
