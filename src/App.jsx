@@ -4,8 +4,8 @@ import Login from './auth/Login'
 import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar'
 import AdminDashboard from './Pages/Users/Admin/Pages/Dashboard/AdminDashboard'
-import { AddFormSlice } from './redux/slice/AddFormSlice'
 import AddUsers from './Pages/Users/Admin/Components/Add Users/AddUsers'
+import StudentList from './Pages/Users/Admin/Pages/Student lists/StudentList'
 const App = () => {
 
   const endPoints = createBrowserRouter([
@@ -20,6 +20,14 @@ const App = () => {
       <Sidebar/>
       <AdminDashboard/>
       </> 
+    },
+    {
+      path : '/admin/students',
+      element : <>
+        <Navbar/>
+        <Sidebar/>
+        <StudentList/>
+      </>
     }
   ])
 

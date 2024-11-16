@@ -1,7 +1,7 @@
 import React from 'react'
 import { sidebar_nav_elements } from '../../utils/utils'
 import { IoIosLogOut } from "react-icons/io";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , NavLink } from 'react-router-dom';
 import { ToastContainer , toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import  'react-toastify/dist/ReactToastify.css';
@@ -20,8 +20,6 @@ const Sidebar = () => {
         })
     }
 
-
-
     const logout = () =>{
         toast.promise(delay , {
             pending : 'logging out...',
@@ -34,6 +32,8 @@ const Sidebar = () => {
         })
     }
 
+
+
   return (
     <div className={`h-screen fixed top-0 ${sideBarStatus ? "w-[10vw]" : "w-[5vw]"} bg-white transition-all duration-150 ease-in-out`} >
       <header className='flex justify-center items-center gap-3 mt-2' >
@@ -43,10 +43,12 @@ const Sidebar = () => {
 
       <main>
         {sidebar_nav_elements?.map((Element , id) =>(
+            <NavLink to={`/admin/${Element.link}`} >
             <div key={id} className={`py-4 mt-8 flex items-center gap-3 cursor-pointer ${sideBarStatus ? "pl-4" : "justify-center"} `} >
                 <p className='text-xl' >{<Element.icon/>}</p>
                 <p className={`capitalize ${sideBarStatus ? "block" : "hidden"}`} >{Element.link}</p>
             </div>
+            </NavLink>
         ))}
       </main>
 

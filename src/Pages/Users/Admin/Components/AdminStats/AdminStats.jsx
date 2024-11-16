@@ -2,6 +2,7 @@ import React , {useEffect , useState} from 'react'
 import { useSelector , useDispatch } from 'react-redux'
 import { getMentors, getStudents } from '../../../../../redux/slice/UserSlice'
 import { FaGraduationCap } from "react-icons/fa";
+import Loader from '../../../../../utils/Loaders/Loader';
 import { admin_stats } from '../../../../../utils/utils';
 
 const AdminStats = () => {
@@ -38,8 +39,8 @@ const AdminStats = () => {
               <p className='text-right capitalize font-semibold opacity-70' >{Element.item}</p>
             </header>
             <main>
-              <p className='text-6xl text-right mt-3' >
-              {handleStats(Element.item)}
+              <p className={`text-6xl text-right mt-3`} >
+              {(handleStats(Element.item) === 0) ? <Loader/> : handleStats(Element.item)}
               </p>
             </main>
           </div>

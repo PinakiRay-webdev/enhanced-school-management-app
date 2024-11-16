@@ -14,12 +14,12 @@ export const sidebar_nav_elements = [
     {
         id : 2,
         icon : RiGraduationCapFill,
-        link : 'student'
+        link : 'students'
     },
     {
         id : 3,
         icon : GiTeacher,
-        link : 'teacher'
+        link : 'teachers'
     },
     {
         id : 4,
