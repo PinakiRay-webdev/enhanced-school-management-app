@@ -37,7 +37,7 @@ const Navbar = () => {
         {/* left side  */}
         <div className='flex items-center gap-4'>
         <p onClick={toggleSideBarMenu} className='cursor-pointer' >{sidebarStatus ? <TbGridDots/> : <TbDotsVertical/>}</p>
-        <p className='capitalize'>{currentLocation}</p>
+        <p className='capitalize text-xl font-semibold'>{currentLocation}</p>
         </div>
 
         {/* right side  */}
