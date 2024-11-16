@@ -56,6 +56,16 @@ export const CreateMentor = createAsyncThunk('CreateMentor' , async(newMentor) =
   }
 })
 
+//functions for delete student
+export const deleteStudent = createAsyncThunk('deleteStudent' , async(studentID) =>{
+  try {
+    await axios.delete(`${BASE_URL_STUDENT}/${studentID}`)
+    return studentID
+  } catch (error) {
+    console.log('Error : '+error.message) 
+  }
+})
+
 export const UserSlice = createSlice({
   name: "users",
   initialState,
@@ -125,6 +135,21 @@ export const UserSlice = createSlice({
           (state.isError = true),
           console.log({ Error: action.payload.message });
       });
+
+      builder
+        .addCase(deleteStudent.pending , (state) =>{
+          state.isLoading = true,
+          state.isError = false
+        })
+        .addCase(deleteStudent.fulfilled , (state , action) =>{
+          state.isLoading = false,
+          state.students = state.students.filter((e) => e.id !== action.payload)
+        })
+        .addCase(deleteStudent.rejected , (state , action) =>{
+          state.isLoading = false,
+          state.isError = true,
+          console.log({Error : action.error.message})
+        })
   },
 });
 

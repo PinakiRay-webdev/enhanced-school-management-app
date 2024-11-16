@@ -1,6 +1,6 @@
 import React , {useState , useEffect} from 'react'
 import { useSelector , useDispatch } from 'react-redux'
-import { getStudents } from '../../../../../redux/slice/UserSlice'
+import { deleteStudent, getStudents } from '../../../../../redux/slice/UserSlice'
 import { MdDelete } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import { PiDotsThreeCircleLight } from "react-icons/pi";
@@ -59,7 +59,7 @@ const StudentList = () => {
             
             <div className='flex items-center gap-4' >
               <p className='text-xl text-orange-500 cursor-pointer' ><FaUserEdit/></p>
-              <p className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
+              <p onClick={() =>dispatch(deleteStudent(Element.id))} className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
               <p className='text-xl text-lime-800 cursor-pointer' ><PiDotsThreeCircleLight/></p>
             </div>
           </div>
