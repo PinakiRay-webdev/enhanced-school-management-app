@@ -1,20 +1,29 @@
-import React , {useEffect} from 'react'
+import React , {useEffect , useState} from 'react'
 import { useSelector , useDispatch } from 'react-redux'
 import { getMentors} from '../../../../../redux/slice/UserSlice'
 import { MdDelete } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import { PiDotsThreeCircleLight } from "react-icons/pi";
+import DeleteConfirmation from '../../../../../utils/DeleteConfirmationBox/DeleteConfirmation';
 
 const TeacherList = () => {
 
+  const [deleteBoxStatus , setDeleteBoxStatus] = useState("scale-0")
+  const [mentorID, setMentorID] = useState("")
 
   const teacherData = useSelector((state) => state.users.mentors)
   const dispatch = useDispatch()
   const sidebarStatus = useSelector((state) => state.sidebar.isOpen)
 
+  const openDeleteBox = (mentorID) =>{
+    setMentorID(mentorID)
+    setDeleteBoxStatus("scale-100")
+  }
+
   useEffect(()=>{
     dispatch(getMentors())
   },[dispatch])
+
 
   return (
     <div className={`${sidebarStatus ? "ml-[11vw]" : "ml-[6vw]"}  my-2 mr-[1vw]`} >
@@ -59,12 +68,13 @@ const TeacherList = () => {
             
             <div className='flex items-center gap-4' >
               <p className='text-xl text-orange-500 cursor-pointer' ><FaUserEdit/></p>
-              <p className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
+              <p onClick={() => openDeleteBox(Element.id)} className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
               <p className='text-xl text-lime-800 cursor-pointer' ><PiDotsThreeCircleLight/></p>
             </div>
           </div>
         ))}
       </main>
+      <DeleteConfirmation deleteBoxStatus={deleteBoxStatus} setDeleteBoxStatus={setDeleteBoxStatus} mentorID = {mentorID} />
     </div>
   )
 }

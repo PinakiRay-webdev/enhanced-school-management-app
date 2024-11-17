@@ -1,12 +1,15 @@
 import React , {useState , useEffect} from 'react'
 import { useSelector , useDispatch } from 'react-redux'
-import { deleteStudent, getStudents } from '../../../../../redux/slice/UserSlice'
+import { getStudents } from '../../../../../redux/slice/UserSlice'
 import { MdDelete } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import { PiDotsThreeCircleLight } from "react-icons/pi";
+import DeleteConfirmation from '../../../../../utils/DeleteConfirmationBox/DeleteConfirmation';
 
 const StudentList = () => {
 
+  const [deleteBoxStatus , setDeleteBoxStatus] = useState("scale-0")
+  const [studentID, setStudentID] = useState("")
 
   const studentData = useSelector((state) => state.users.students)
   const dispatch = useDispatch()
@@ -15,6 +18,11 @@ const StudentList = () => {
   useEffect(()=>{
     dispatch(getStudents())
   },[dispatch])
+
+  const openDeleteBox = (studentID) =>{
+    setStudentID(studentID)
+    setDeleteBoxStatus("scale-100")
+  }
 
   return (
     <div className={`${sidebarStatus ? "ml-[11vw]" : "ml-[6vw]"}  my-2 mr-[1vw]`} >
@@ -59,12 +67,14 @@ const StudentList = () => {
             
             <div className='flex items-center gap-4' >
               <p className='text-xl text-orange-500 cursor-pointer' ><FaUserEdit/></p>
-              <p onClick={() =>dispatch(deleteStudent(Element.id))} className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
-              <p className='text-xl text-lime-800 cursor-pointer' ><PiDotsThreeCircleLight/></p>
+              <p onClick={() => openDeleteBox(Element.id)} className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
+              <p  className='text-xl text-lime-800 cursor-pointer' ><PiDotsThreeCircleLight/></p>
             </div>
           </div>
         ))}
       </main>
+
+      <DeleteConfirmation deleteBoxStatus = {deleteBoxStatus} setDeleteBoxStatus = {setDeleteBoxStatus} studentID = {studentID} />
     </div>
   )
 }
