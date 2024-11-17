@@ -43,7 +43,7 @@ const Sidebar = () => {
 
       <main>
         {sidebar_nav_elements?.map((Element , id) =>(
-            <NavLink to={`/admin/${Element.link}`} >
+            <NavLink to={`/admin/${Element.link}`} className={({isActive}) => `${isActive ? "text-green-600" : "text-black"}`} >
             <div key={id} className={`py-4 mt-8 flex items-center gap-3 cursor-pointer ${sideBarStatus ? "pl-4" : "justify-center"} `} >
                 <p className='text-xl' >{<Element.icon/>}</p>
                 <p className={`capitalize ${sideBarStatus ? "block" : "hidden"}`} >{Element.link}</p>

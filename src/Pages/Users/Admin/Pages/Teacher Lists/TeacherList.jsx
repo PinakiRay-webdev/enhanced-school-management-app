@@ -3,7 +3,7 @@ import { useSelector , useDispatch } from 'react-redux'
 import { getMentors} from '../../../../../redux/slice/UserSlice'
 import { MdDelete } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
-import { PiDotsThreeCircleLight } from "react-icons/pi";
+import { PiInfo } from "react-icons/pi";
 import DeleteConfirmation from '../../../../../utils/DeleteConfirmationBox/DeleteConfirmation';
 
 const TeacherList = () => {
@@ -69,7 +69,7 @@ const TeacherList = () => {
             <div className='flex items-center gap-4' >
               <p className='text-xl text-orange-500 cursor-pointer' ><FaUserEdit/></p>
               <p onClick={() => openDeleteBox(Element.id)} className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
-              <p className='text-xl text-lime-800 cursor-pointer' ><PiDotsThreeCircleLight/></p>
+              <p className='text-xl text-lime-800 cursor-pointer' ><PiInfo/></p>
             </div>
           </div>
         ))}
