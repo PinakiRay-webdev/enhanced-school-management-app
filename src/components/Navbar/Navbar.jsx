@@ -7,10 +7,12 @@ import { toggleSideBar } from '../../redux/slice/SideBarSlice';
 
 import { useLocation,} from 'react-router-dom';
 import { toggleAddForm } from '../../redux/slice/AddFormSlice';
+import { getMentors, getStudents } from '../../redux/slice/UserSlice';
 
 const Navbar = () => {
 
     const sidebarStatus = useSelector((state) => state.sidebar.isOpen)
+
     const dispatch = useDispatch()
     const[currentLocation , setCurrentLocation] = useState("")
 
@@ -21,14 +23,21 @@ const Navbar = () => {
     const student = JSON.parse(localStorage.getItem("studentCredentials"))
     const mentor = JSON.parse(localStorage.getItem("mentorCredentials"))
 
+    
     const userMail = useRef(student || admin || mentor)
+    const currentStudent = useSelector((state) => state.users.students.find((e) => e.Email === userMail.current.mail))
+    const currentMentor = useSelector((state) => state.users.mentors.find((e) => e.Email === userMail.current.mail))
+
 
     useEffect(()=>{
         setCurrentLocation(site)
-    },[site])
-    
-    const toggleSideBarMenu = () =>{
-      dispatch(toggleSideBar())
+        dispatch(getStudents())
+        dispatch(getMentors())
+      },[site])
+      
+      const toggleSideBarMenu = () =>{
+        dispatch(toggleSideBar())
+
     }
 
   return (
@@ -50,7 +59,10 @@ const Navbar = () => {
                 <FaUserCircle/>
                 </p>
                 <div>
-                    <p className='text-sm font-bold' >Rohan Ray</p>
+                  <div className='flex items-center gap-1' >
+                    <p className='text-sm font-bold' >{currentStudent?.FirstName || currentMentor?.FirstName || "Rohan"}</p>
+                    <p className='text-sm font-bold' >{currentStudent?.LastName || currentMentor?.LastName || "Rohan"}</p>
+                  </div>
                     <p className='text-sm opacity-70 font-semibold'>{userMail.current.mail}</p>
                 </div>
             </div>

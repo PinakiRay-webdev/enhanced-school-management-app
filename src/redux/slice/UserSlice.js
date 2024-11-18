@@ -32,6 +32,7 @@ export const createStudent = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
         },
+        
       });
 
       return response.data;

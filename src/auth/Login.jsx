@@ -50,7 +50,7 @@ const Login = () => {
 
             if (mentor) {
               localStorage.setItem(
-                'userCredentials',
+                'mentorCredentials',
                 JSON.stringify({
                   mail: data.usermail,
                   role: 'mentor',
@@ -67,7 +67,7 @@ const Login = () => {
 
               if (student) {
                 localStorage.setItem(
-                  'userCredentials',
+                  'studentCredentials',
                   JSON.stringify({
                     mail: data.usermail,
                     role: 'student',

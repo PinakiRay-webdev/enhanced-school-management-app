@@ -35,7 +35,7 @@ const Sidebar = () => {
 
 
   return (
-    <div className={`h-screen fixed top-0 ${sideBarStatus ? "w-[10vw]" : "w-[5vw]"} bg-white transition-all duration-150 ease-in-out`} >
+    <div className={`h-screen fixed z-40 top-0 ${sideBarStatus ? "w-[10vw]" : "w-[5vw]"} bg-white transition-all duration-150 ease-in-out`} >
       <header className='flex justify-center items-center gap-3 mt-2' >
         <p className='text-2xl font-semibold py-1 px-3 rounded-md bg-[#a7c957]' >S</p>
         <p className={`text-lg ${sideBarStatus ? "block" : "hidden"} `} >Schoolify</p>
