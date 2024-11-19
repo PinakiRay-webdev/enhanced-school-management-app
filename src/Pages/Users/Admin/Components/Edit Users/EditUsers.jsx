@@ -5,11 +5,12 @@ import { toggleAddForm } from "../../../../../redux/slice/AddFormSlice";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { editStudent, getStudents,} from "../../../../../redux/slice/UserSlice";
+import { editMentor, editStudent, getStudents,} from "../../../../../redux/slice/UserSlice";
 
-const EditUsers = ({editBoxStatus , setEditBoxStatus , studentID}) => {
+const EditUsers = ({editBoxStatus , setEditBoxStatus , studentID , mentorID}) => {
 
     const SelectedStudent = useSelector((state) => state.users.students.find((e) => e.id === studentID))
+    const SelectedMentor = useSelector((state) => state.users.mentors.find((e) => e.id === mentorID))
     const dispatch = useDispatch();
 
   const {
@@ -28,9 +29,12 @@ const EditUsers = ({editBoxStatus , setEditBoxStatus , studentID}) => {
         setValue("mail" , SelectedStudent.Email)
         setValue("course" , SelectedStudent.Course)
     }else{
-        
+        setValue("firstname" , SelectedMentor?.FirstName)
+        setValue("lastname" , SelectedMentor?.LastName)
+        setValue("mail" , SelectedMentor?.Email)
+        setValue("department" , SelectedMentor?.Department)
     }
-  },[SelectedStudent , setValue])
+  },[SelectedStudent , setValue , SelectedMentor])
 
 
   const closeEditBox = () =>{
@@ -45,6 +49,14 @@ const EditUsers = ({editBoxStatus , setEditBoxStatus , studentID}) => {
         Email : data.mail,
         Course : data.course
     }
+
+    const updatedMentor = {
+      id : mentorID,
+      FirstName : data.firstname,
+      LastName : data.lastname,
+      Email : data.mail,
+      Department : data.department
+  }
     toast.loading('Applying changes' , {
         theme : 'dark'
     })
@@ -54,7 +66,7 @@ const EditUsers = ({editBoxStatus , setEditBoxStatus , studentID}) => {
         }, 1500);
     }).then(()=>{
         toast.dismiss()
-        dispatch(editStudent(updatedStudent))
+        SelectedStudent ? dispatch(editStudent(updatedStudent)) : dispatch(editMentor(updatedMentor))
         toast.success('Sucessfully updated!!' , {
             theme : 'dark'
         });
@@ -146,26 +158,51 @@ const EditUsers = ({editBoxStatus , setEditBoxStatus , studentID}) => {
           )}
         </div>
         
-        <div>
-            <label>Course</label>
-            <br />
-            <input
-              {...register("course", {
-                required: {
-                  value: true,
-                  message: "this field is required",
-                },
-              })}
-              className="w-full ring-1 ring-green-500 py-1 px-2 rounded-md outline-none mt-2"
-              type="text"
-              placeholder="example"
-            />
-            {errors.course && (
-              <p className="text-red-500 font-semibold mt-2 text-xs">
-                {errors.course.message}
-              </p>
-            )}
-          </div>
+      {SelectedStudent && (
+                <div>
+                <label>Course</label>
+                <br />
+                <input
+                  {...register("course", {
+                    required: {
+                      value: true,
+                      message: "this field is required",
+                    },
+                  })}
+                  className="w-full ring-1 ring-green-500 py-1 px-2 rounded-md outline-none mt-2"
+                  type="text"
+                  placeholder="example"
+                />
+                {errors.course && (
+                  <p className="text-red-500 font-semibold mt-2 text-xs">
+                    {errors.course.message}
+                  </p>
+                )}
+              </div>
+      )}
+
+      {SelectedMentor && (
+                <div>
+                <label>Department</label>
+                <br />
+                <input
+                  {...register("department", {
+                    required: {
+                      value: true,
+                      message: "this field is required",
+                    },
+                  })}
+                  className="w-full ring-1 ring-green-500 py-1 px-2 rounded-md outline-none mt-2"
+                  type="text"
+                  placeholder="example"
+                />
+                {errors.department && (
+                  <p className="text-red-500 font-semibold mt-2 text-xs">
+                    {errors.department.message}
+                  </p>
+                )}
+              </div>
+      )}
 
         <button className="bg-green-700 absolute bottom-2 px-4 py-1 text-white rounded-md right-4">
           Edit user

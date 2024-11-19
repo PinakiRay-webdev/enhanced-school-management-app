@@ -106,6 +106,20 @@ export const editStudent = createAsyncThunk(
   }
 );
 
+//function for edit mentors
+export const editMentor = createAsyncThunk('editMentor' , async(updatedMentor) =>{
+  try {
+    const response  = await axios.patch(`${BASE_URL_MENTOR}/${updatedMentor.id}` , updatedMentor , {
+      headers : {
+        'Content-Type' : 'application-json'
+      }
+    })
+    return response.data;
+  } catch (error) {
+    console.log('Error : '+error.message)
+  }
+})
+
 export const UserSlice = createSlice({
   name: "users",
   initialState,
@@ -225,6 +239,25 @@ export const UserSlice = createSlice({
           state.isLoading = false,
           state.isError = true,
           console.log('Error : '+action.error.message)
+        });
+
+        //handling edit mentor
+      builder
+        .addCase(editMentor.pending , (state) =>{
+          state.isLoading = true,
+          state.isError = false
+        })
+        .addCase(editMentor.fulfilled , (state , action) =>{
+          state.isLoading = false;
+          const index = state.mentors.findIndex((e) => e.id === mentorID)
+          if(index !== -1){
+            state.mentors[index] = action.payload;
+          }
+        })
+        .addCase(editMentor.rejected , (state , action) =>{
+          state.isLoading = false,
+          state.isError = true,
+          consple.log('Error : '+action.error.message)
         });
   },
 });
