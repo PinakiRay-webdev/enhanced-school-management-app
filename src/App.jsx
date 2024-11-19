@@ -9,6 +9,7 @@ import StudentList from './Pages/Users/Admin/Pages/Student lists/StudentList'
 import TeacherList from './Pages/Users/Admin/Pages/Teacher Lists/TeacherList'
 import Profile from './components/Profile/Profile'
 import StudentDashboard from './Pages/Users/Student/Pages/Dashboard/StudentDashboard'
+import EditUsers from './Pages/Users/Admin/Components/Edit Users/EditUsers'
 const App = () => {
 
   const endPoints = createBrowserRouter([

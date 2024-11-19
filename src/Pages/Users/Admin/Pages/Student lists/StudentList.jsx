@@ -6,11 +6,13 @@ import { FaUserEdit } from "react-icons/fa";
 import { PiInfo } from "react-icons/pi";
 import DeleteConfirmation from '../../../../../utils/DeleteConfirmationBox/DeleteConfirmation';
 import { useNavigate } from 'react-router-dom';
+import EditUsers from '../../Components/Edit Users/EditUsers';
 
 const StudentList = () => {
 
   const [deleteBoxStatus , setDeleteBoxStatus] = useState("scale-0")
   const [studentID, setStudentID] = useState("")
+  const [editBoxStatus, setEditBoxStatus] = useState("scale-0")
 
   const studentData = useSelector((state) => state.users.students)
   const dispatch = useDispatch()
@@ -23,6 +25,11 @@ const StudentList = () => {
   const openDeleteBox = (studentID) =>{
     setStudentID(studentID)
     setDeleteBoxStatus("scale-100")
+  }
+
+  const openEditBox = (studentID) =>{
+    setStudentID(studentID)
+    setEditBoxStatus("scale-100")
   }
 
   const navigate = useNavigate()
@@ -73,7 +80,7 @@ const StudentList = () => {
 
             {/* actions  */}
             <div className='flex items-center gap-4' >
-              <p className='text-xl text-orange-500 cursor-pointer' ><FaUserEdit/></p>
+              <p onClick={() => openEditBox(Element.id)} className='text-xl text-orange-500 cursor-pointer' ><FaUserEdit/></p>
               <p onClick={() => openDeleteBox(Element.id)} className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
               <p onClick={() => openProfile(Element.id)} className='text-xl text-lime-800 cursor-pointer' ><PiInfo/></p>
             </div>
@@ -82,6 +89,7 @@ const StudentList = () => {
       </main>
 
       <DeleteConfirmation deleteBoxStatus = {deleteBoxStatus} setDeleteBoxStatus = {setDeleteBoxStatus} studentID = {studentID} />
+      <EditUsers editBoxStatus={editBoxStatus} setEditBoxStatus={setEditBoxStatus} studentID = {studentID} />
     </div>
   )
 }

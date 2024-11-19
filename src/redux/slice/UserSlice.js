@@ -32,7 +32,6 @@ export const createStudent = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
         },
-        
       });
 
       return response.data;
@@ -73,6 +72,7 @@ export const deleteStudent = createAsyncThunk(
   }
 );
 
+//function for delete mentor
 export const deleteMentor = createAsyncThunk(
   "deleteMento",
   async (mentorID) => {
@@ -81,6 +81,27 @@ export const deleteMentor = createAsyncThunk(
       return mentorID;
     } catch (error) {
       console.log("Error : " + error.message);
+    }
+  }
+);
+
+//function for edit Student
+export const editStudent = createAsyncThunk(
+  "editStudent",
+  async (updatedStudent) => {
+    try {
+      const response = await axios.patch(
+        `${BASE_URL_STUDENT}/${updatedStudent.id}`,
+        updatedStudent,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log("Error : "+error.message)
     }
   }
 );
@@ -186,6 +207,25 @@ export const UserSlice = createSlice({
           (state.isError = true),
           console.log({ Error: action.error.message });
       });
+    
+      //handling edit student
+      builder
+        .addCase(editStudent.pending , (state) =>{
+          state.isLoading = true,
+          state.isError = false
+        })
+        .addCase(editStudent.fulfilled , (state , action) =>{
+          state.isLoading = false;
+          const index = state.students.findIndex((e) => e.id === action.payload);
+          if(index !== -1){
+            state.students[index] = action.payload
+          }
+        })
+        .addCase(editStudent.rejected , (state , action) => {
+          state.isLoading = false,
+          state.isError = true,
+          console.log('Error : '+action.error.message)
+        });
   },
 });
 
