@@ -40,7 +40,7 @@ const TeacherList = () => {
         <p className='capitalize text-green-800 font-semibold border' >Mentor ID</p>
         <p className='capitalize text-green-800 font-semibold' >Name</p>
         <p className='capitalize text-green-800 font-semibold' >Email</p>
-        <p className='capitalize text-green-800 font-semibold' >Course</p>
+        <p className='capitalize text-green-800 font-semibold' >Department</p>
         <p className='capitalize text-green-800 font-semibold' >City</p>
         <p className='capitalize text-green-800 font-semibold' >Actions</p>
       </header>
@@ -65,7 +65,7 @@ const TeacherList = () => {
             </div>
 
             <div>
-              <p>{(Element.Course ? Element.Course : "N/A" )}</p>
+              <p>{(Element.Department ? Element.Department : "N/A" )}</p>
             </div>
 
             <div>

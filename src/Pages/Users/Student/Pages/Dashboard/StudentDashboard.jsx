@@ -7,7 +7,7 @@ const StudentDashboard = () => {
 
   return (
     <div className={`${sidebarStatus ? "pl-[10vw]" : "pl-[5vw]"}`} >
-      <div className='px-4 py-2' >
+      <div className='px-4 py-2'>
       This is student dashboard
       </div>
     </div>

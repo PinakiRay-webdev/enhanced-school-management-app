@@ -61,7 +61,7 @@ const Navbar = () => {
                 <div>
                   <div className='flex items-center gap-1' >
                     <p className='text-sm font-bold' >{currentStudent?.FirstName || currentMentor?.FirstName || "Rohan"}</p>
-                    <p className='text-sm font-bold' >{currentStudent?.LastName || currentMentor?.LastName || "Rohan"}</p>
+                    <p className='text-sm font-bold' >{currentStudent?.LastName || currentMentor?.LastName}</p>
                   </div>
                     <p className='text-sm opacity-70 font-semibold'>{userMail.current.mail}</p>
                 </div>
