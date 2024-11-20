@@ -27,9 +27,19 @@ const StudentEditProfile = () => {
 
   const onSubmit = async (data) => {
     toast.loading("Saving changes...", { theme: "dark" });
+
     const updatedStudent = {
       id: studentID,
       FirstName: data.firstname,
+      LastName: data.lastname,
+      Email: data.mail,
+      Gender: data.gender,
+      Phone: data.phone,
+      Address : data.address,
+      City : data.city,
+      State : data.state,
+      Country : data.country,
+      PinCode : data.pincode
     };
 
     await new Promise((resolve) => {
@@ -56,85 +66,187 @@ const StudentEditProfile = () => {
 
   return (
     <div className={`pl-[5vw]`}>
-      <div className="px-3 py-4 h-[90vh]">
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-white h-full relative px-6 py-4">
-          <h1 className="font-medium text-xl">General Information</h1>
-          {/* general information  */}
-          <div className="grid grid-cols-2 mt-4" >
-            <div>
-              <label className="text-sm font-medium" >First Name</label> <br />
-              <input
-                {...register("firstname", {
-                  required: {
-                    value: true,
-                    message: "This feild is required",
-                  },
-                })}
-                className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2"
-                type="text"
-              />
-              {errors.firstname && (
-                <p className="text-xs text-red-600 font-semibold">
-                  {errors.firstname.message}
-                </p>
-              )}
+      <div className="px-3 py-4 h-[92vh] grid grid-cols-3 gap-3">
+        {/* edit form  */}
+        <div className="col-span-2 h-full" >
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="bg-white relative px-6 py-4 h-full rounded-md"
+          >
+            <h1 className="font-medium text-xl">General Information</h1>
+            {/* general information  */}
+            <div className="grid grid-cols-2 mt-4 gap-6">
+              <div>
+                <label className="text-sm font-medium opacity-80">
+                  First Name
+                </label>{" "}
+                <br />
+                <input
+                  {...register("firstname", {
+                    required: {
+                      value: true,
+                      message: "This feild is required",
+                    },
+                  })}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2 w-full"
+                  type="text"
+                />
+                {errors.firstname && (
+                  <p className="text-xs text-red-600 font-semibold">
+                    {errors.firstname.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label className="text-sm font-medium opacity-80">
+                  Last Name
+                </label>{" "}
+                <br />
+                <input
+                  {...register("lastname", {
+                    required: {
+                      value: true,
+                      message: "This feild is required",
+                    },
+                  })}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2 w-full"
+                  type="text"
+                />
+                {errors.lastname && (
+                  <p className="text-xs text-red-600 font-semibold">
+                    {errors.lastname.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label className="text-sm font-medium opacity-80">
+                  Email Address
+                </label>{" "}
+                <br />
+                <input
+                  {...register("mail", {
+                    required: {
+                      value: true,
+                      message: "This feild is required",
+                    },
+                  })}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2 w-full"
+                  type="text"
+                />
+                {errors.mail && (
+                  <p className="text-xs text-red-600 font-semibold">
+                    {errors.mail.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label className="text-sm font-medium opacity-80">Gender</label>{" "}
+                <br />
+                <input
+                  {...register("gender")}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2 w-full"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium opacity-80">
+                  Phone No.
+                </label>{" "}
+                <br />
+                <input
+                  {...register("phone")}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2"
+                  type="text"
+                />
+              </div>
             </div>
-            <div>
-              <label className="text-sm font-medium" >Last Name</label> <br />
-              <input
-                {...register("lastname", {
-                  required: {
-                    value: true,
-                    message: "This feild is required",
-                  },
-                })}
-                className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2"
-                type="text"
-              />
-              {errors.lastname && (
-                <p className="text-xs text-red-600 font-semibold">
-                  {errors.lastname.message}
-                </p>
-              )}
+
+            {/* address information  */}
+            <h1 className="font-medium text-xl mt-6 mb-4">Address</h1>
+            <div className="grid grid-cols-3 gap-6">
+              <div className="col-span-2">
+                <label className="text-sm font-medium opacity-80">
+                  Address / House
+                </label>{" "}
+                <br />
+                <input
+                {...register('address')}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Enter your address"
+                />
+              </div>
+
+              <div className="col-span-1">
+                <label className="text-sm font-medium opacity-80">
+                  City
+                </label>{" "}
+                <br />
+                <input
+                {...register('city')}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Enter your address"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-medium opacity-80">State</label>{" "}
+                <br />
+                <input
+                {...register('state')}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Enter your address"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-medium opacity-80">Country</label>{" "}
+                <br />
+                <input
+                {...register('country')}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Enter your address"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-medium opacity-80">
+                  Pincode
+                </label>{" "}
+                <br />
+                <input
+                {...register('pincode')}
+                  className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md w-full"
+                  type="text"
+                  placeholder="Enter your address"
+                />
+              </div>
             </div>
-          <div>
-          <label className="text-sm font-medium" >Email Address</label> <br />
-          <input {...register('mail' , {
-            required:{
-              value : true,
-              message : 'This feild is required'
-            }
-          })} className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2" type="text" />
-          {errors.mail && <p className='text-xs text-red-600 font-semibold' >{errors.mail.message}</p>}
-        </div>
-        <div>
-          <label className="text-sm font-medium" >Gender</label> <br />
-          <input {...register('gender' , {
-            required:{
-              value : true,
-              message : 'This feild is required'
-            }
-          })} className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2" type="text" />
-          {errors.Gender && <p className='text-xs text-red-600 font-semibold' >{errors.Gender.message}</p>}
-        </div>
-        <div>
-          <label className="text-sm font-medium" >Phone No.</label> <br />
-          <input {...register('phone' , {
-            required:{
-              value : true,
-              message : 'This feild is required'
-            }
-          })} className="ring-2 ring-lime-500 outline-none py-1 px-2 rounded-md my-2" type="text" />
-          {errors.phone && <p className='text-xs text-red-600 font-semibold' >{errors.phone.message}</p>}
-        </div>
-          </div>
 
+            <button className="absolute bottom-2 bg-black text-white px-4 py-1 rounded-md">
+              Save changes
+            </button>
+          </form>
+        </div>
+          
+          {/* user card  */}
+        <div className="bg-white rounded-md" >
+          {/* background image  */}
+            <div className="bg-green-100 h-[40%] relative" >
+              {/* profile image  */}
+              <div className="bg-green-700 rounded-full w-[7rem] h-[7rem] absolute bottom-[-3rem] left-[50%] translate-x-[-50%]" >
+              </div>
+            </div>
 
-
-          <button className="absolute bottom-5 bg-black text-white px-4 py-1 rounded-md">
-            Save changes
-          </button>
-        </form>
+            <div className="mt-[4rem]" >
+              <h1 className="text-center capitalize font-semibold text-lg" >{currentStudent?.FirstName} {currentStudent?.LastName}</h1>
+              <p className="text-center capitalize" >{currentStudent?.Course} Student</p>
+              <p></p>
+            </div>
+        </div>
       </div>
     </div>
   );

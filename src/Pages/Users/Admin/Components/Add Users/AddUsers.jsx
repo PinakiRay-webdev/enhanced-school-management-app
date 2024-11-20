@@ -31,6 +31,13 @@ const AddUsers = () => {
       Password: data.pass,
       Role: data.role,
       Course: data.course,
+      DOB : "",
+      Gender : "",
+      Phone : "",
+      Adress : "",
+      City : "",
+      State : "",
+      PinCode : ""
     };
 
     const newMentor = {
@@ -40,6 +47,13 @@ const AddUsers = () => {
       Password: data.pass,
       Role: data.role,
       Department: data.department,
+      DOB : "",
+      Gender : "",
+      Phone : "",
+      Adress : "",
+      City : "",
+      State : "",
+      PinCode : ""
     };
 
     toast.loading("adding...", { theme: "dark", position: "top-center" });
