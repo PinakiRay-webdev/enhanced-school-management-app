@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getMentors, getStudents } from "../../redux/slice/UserSlice";
-import { CiLocationOn, CiMail } from "react-icons/ci";
+import { CiLocationOn, CiMail , CiPhone  } from "react-icons/ci";
+import { IoMdMale , IoMdFemale } from "react-icons/io";
+import { LiaUserTagSolid } from "react-icons/lia";
+
+
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -75,24 +79,47 @@ const Profile = () => {
 
             {/* user address  */}
             <p className="flex items-center gap-1 mt-2">
-              <span>
-                <CiLocationOn />
-              </span>
-              {currentStudent?.City ? currentStudent?.City : ""}
+              {currentStudent?.Address !== '' || currentStudent?.City || currentStudent?.State || currentStudent?.Country ? (<p><CiLocationOn/></p>) : ""}
+              <div className="flex items-center gap-1" >
+                <p>
+              {currentStudent?.Address ? currentStudent?.Address+"," : ""}
+                </p>
+                <p>
+              {currentStudent?.City ? currentStudent?.City+"," : ""}
+                </p>
+                <p>
+              {currentStudent?.State ? currentStudent?.State+"," : ""}
+                </p>
+                <p>
+              {currentStudent?.Country ? currentStudent?.Country+"," : ""}
+                </p>
+              </div>
             </p>
 
             {/* user personal details  */}
             <div className="flex items-center gap-3 mt-2" >
 
-            {currentUser?.DOB !== '' ? <p>{currentUser?.DOB}</p> : ""}
-            {currentUser?.Gender !== '' ? <p>{currentUser?.Gender}</p> : ""}
+            {currentUser?.DOB !== '' && (
+              <div>
+
+              </div>
+            )}
+            {currentUser?.Gender !== '' && (
+              <div className="flex items-center gap-2" >
+                {currentUser?.Gender === 'male' ? <p><IoMdMale/></p> : <p><IoMdFemale/></p>}
+                <p>{currentUser?.Gender}</p>
+              </div>
+            )}
             </div>
 
             {/* position of the user  */}
             {currentStudent && (
+              <div className="flex items-center gap-2" >
+              <p><LiaUserTagSolid/></p>
               <p className="my-2 font-medium opacity-80">
                 Student in {currentStudent?.Course} course
               </p>
+              </div>
             )}
 
             {/* additional button only for admin  */}
@@ -117,6 +144,13 @@ const Profile = () => {
                 <CiMail /> {currentUser?.Email}
               </p>
             </div>
+            {currentUser?.Phone && (
+            <div className="flex gap-3 flex-wrap">
+              <p className="bg-zinc-100 w-fit px-3 py-1 text-sm rounded-md mt-2 flex items-center gap-1">
+                <CiPhone /> {currentUser?.Phone}
+              </p>
+            </div>
+            )}
           </div>
         </div>
       </div>

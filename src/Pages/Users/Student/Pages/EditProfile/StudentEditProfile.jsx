@@ -60,7 +60,14 @@ const StudentEditProfile = () => {
       setValue("lastname", currentStudent.LastName);
       setValue("mail", currentStudent.Email);
       setValue("gender", currentStudent.Gender ? currentStudent.Gender : "");
-      setValue("phone", currentStudent.Phone ? currentStudent.phone : "");
+      setValue("phone", currentStudent.Phone ? currentStudent.Phone : "");
+      setValue("address", currentStudent.Address ? currentStudent.Address : "");
+      setValue("city", currentStudent.City ? currentStudent.City : "");
+      setValue("state", currentStudent.State ? currentStudent.State : "");
+      setValue("country", currentStudent.Country ? currentStudent.Country : "");
+      setValue("pincode", currentStudent.PinCode ? currentStudent.PinCode : "");
+
+
     }
   }, [currentStudent]);
 
