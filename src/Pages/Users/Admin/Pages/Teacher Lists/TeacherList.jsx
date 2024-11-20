@@ -35,7 +35,7 @@ const TeacherList = () => {
   const navigate = useNavigate();
 
   const openProfile = (userID) =>{
-    navigate(`/profile/${userID}`)
+    navigate(`/admin/mentor/profile/${userID}`)
   }
 
 

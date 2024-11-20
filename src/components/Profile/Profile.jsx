@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getMentors, getStudents } from "../../redux/slice/UserSlice";
 import { CiLocationOn, CiMail } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const params = useParams();
@@ -15,11 +16,18 @@ const Profile = () => {
     state.users.mentors.find((e) => e.id === userID)
   );
 
+  const navigate = useNavigate()
+
+  const openEditProfile = (studentID) =>{
+    navigate(`/student/profile/edit/${studentID}`)
+  }
+
   const currentUser = currentStudent || currentMentor;
 
   const userRole =
     JSON.parse(localStorage.getItem("adminCredentials")) ||
-    JSON.parse(localStorage.getItem("studentCredentials"));
+    JSON.parse(localStorage.getItem("studentCredentials")) || 
+    JSON.parse(localStorage.getItem('mentorCredentials'))
 
   const dispatch = useDispatch();
 
@@ -34,8 +42,8 @@ const Profile = () => {
           {/* background picture  */}
         <div className="relative bg-green-100 h-[30vh] rounded-t-md">
           {/* button to edit the user profile  */}
-          {userRole.role !== 'admin' && (
-            <button className="absolute right-10 top-4 bg-black text-white px-4 py-2 rounded-md text-xs">
+          {userRole.role === 'student' && (
+            <button onClick={() => openEditProfile(currentStudent?.id)} className="absolute right-10 top-4 bg-black text-white px-4 py-2 rounded-md text-xs">
               Edit Profile
             </button>
           )}

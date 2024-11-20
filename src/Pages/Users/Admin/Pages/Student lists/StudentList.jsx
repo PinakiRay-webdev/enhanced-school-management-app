@@ -18,6 +18,10 @@ const StudentList = () => {
   const dispatch = useDispatch()
   const sidebarStatus = useSelector((state) => state.sidebar.isOpen)
 
+  const userRole =
+  JSON.parse(localStorage.getItem("adminCredentials")) ||
+  JSON.parse(localStorage.getItem('mentorCredentials'))
+
   useEffect(()=>{
     dispatch(getStudents())
   },[dispatch])
@@ -35,7 +39,7 @@ const StudentList = () => {
   const navigate = useNavigate()
 
   const openProfile = (userID) =>{
-    navigate(`/admin/student/profile/${userID}`)
+    navigate(`/${userRole.role}/student/profile/${userID}`)
   }
 
   return (

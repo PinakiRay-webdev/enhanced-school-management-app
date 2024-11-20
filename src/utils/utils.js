@@ -36,6 +36,20 @@ export const student_sidebar_nav_elements = [
     },
 ]
 
+
+export const mentor_sidebar_nav_elements = [
+    {
+        id : 1,
+        icon : RiDashboardFill,
+        link : 'dashboard'
+    },
+    {
+        id : 2,
+        icon : RiGraduationCapFill,
+        link : 'students'
+    },
+]
+
 export const admin_stats = [
     {
         id : 1,
