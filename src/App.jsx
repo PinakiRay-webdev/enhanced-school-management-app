@@ -10,6 +10,7 @@ import TeacherList from './Pages/Users/Admin/Pages/Teacher Lists/TeacherList'
 import Profile from './components/Profile/Profile'
 import StudentDashboard from './Pages/Users/Student/Pages/Dashboard/StudentDashboard'
 import EditUsers from './Pages/Users/Admin/Components/Edit Users/EditUsers'
+import StudentSidebar from './Pages/Users/Student/components/SideBar/StudentSideBar'
 const App = () => {
 
   const endPoints = createBrowserRouter([
@@ -34,6 +35,14 @@ const App = () => {
       </>
     },
     {
+      path : '/admin/student/profile/:id',
+      element : <>
+        <Navbar/>
+        <Sidebar/>
+        <Profile/>
+      </>
+    },
+    {
       path : '/admin/teachers',
       element : <>
         <Navbar/>
@@ -45,7 +54,7 @@ const App = () => {
       path : '/student/dashboard',
       element : <>
         <Navbar/>
-        <Sidebar/>
+        <StudentSidebar/>
         <StudentDashboard/>
       </>
     },
@@ -53,15 +62,21 @@ const App = () => {
       path : '/mentor/dashboard',
       element : <>
         <Navbar/>
-        <Sidebar/>
         <StudentDashboard/>
       </>
     },
     {
-      path : '/profile/:id',
+      path : 'student/profile/:id',
       element : <>
         <Navbar/>
-        <Sidebar/>
+        <StudentSidebar/>
+        <Profile/>
+      </>
+    },
+    {
+      path : '/profile/edit/:id',
+      element : <>
+        <Navbar/>
         <Profile/>
       </>
     }

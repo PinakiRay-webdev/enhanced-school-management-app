@@ -35,7 +35,7 @@ const StudentList = () => {
   const navigate = useNavigate()
 
   const openProfile = (userID) =>{
-    navigate(`/profile/${userID}`)
+    navigate(`/admin/student/profile/${userID}`)
   }
 
   return (

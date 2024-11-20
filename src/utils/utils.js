@@ -28,6 +28,14 @@ export const sidebar_nav_elements = [
     }
 ]
 
+export const student_sidebar_nav_elements = [
+    {
+        id : 1,
+        icon : RiDashboardFill,
+        link : 'dashboard'
+    },
+]
+
 export const admin_stats = [
     {
         id : 1,
