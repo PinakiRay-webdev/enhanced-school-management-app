@@ -115,7 +115,7 @@ const StudentList = () => {
             ) : (
               <div className='flex items-center gap-4' >
               <p onClick={() => openProfile(Element.id)} className='text-xl text-lime-800 cursor-pointer' ><PiInfo/></p>
-              <p onClick={() => openProfile(Element.id)} className='text-xl text-lime-800 cursor-pointer' ><GiNotebook/></p>
+              <p onClick={() => openMarksAssign(Element.id)} className='text-xl text-lime-800 cursor-pointer' ><GiNotebook/></p>
               </div>
             ) }
           </div>
