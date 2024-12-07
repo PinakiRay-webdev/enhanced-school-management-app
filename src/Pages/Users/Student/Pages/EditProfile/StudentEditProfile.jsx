@@ -66,8 +66,6 @@ const StudentEditProfile = () => {
       setValue("state", currentStudent.State ? currentStudent.State : "");
       setValue("country", currentStudent.Country ? currentStudent.Country : "");
       setValue("pincode", currentStudent.PinCode ? currentStudent.PinCode : "");
-
-
     }
   }, [currentStudent]);
 
