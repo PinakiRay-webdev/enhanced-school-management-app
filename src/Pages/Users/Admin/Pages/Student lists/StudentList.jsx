@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from 'react'
+import React , {useState , useEffect , useCallback} from 'react'
 import { useSelector , useDispatch } from 'react-redux'
 import { getStudents } from '../../../../../redux/slice/UserSlice'
 import { MdDelete } from "react-icons/md";
@@ -22,9 +22,15 @@ const StudentList = () => {
   JSON.parse(localStorage.getItem("adminCredentials")) ||
   JSON.parse(localStorage.getItem('mentorCredentials'))
 
-  useEffect(()=>{
+  const getStudentData = useCallback(()=>{
     dispatch(getStudents())
   },[dispatch])
+
+  useEffect(()=>{
+    getStudentData()
+  },[getStudentData])
+
+
 
   const openDeleteBox = (studentID) =>{
     setStudentID(studentID)
@@ -83,11 +89,16 @@ const StudentList = () => {
             </div>
 
             {/* actions  */}
+            {userRole.role === 'admin' ? (
+              
             <div className='flex items-center gap-4' >
               <p onClick={() => openEditBox(Element.id)} className='text-xl text-orange-500 cursor-pointer' ><FaUserEdit/></p>
               <p onClick={() => openDeleteBox(Element.id)} className='text-xl text-red-600 cursor-pointer' ><MdDelete/></p>
               <p onClick={() => openProfile(Element.id)} className='text-xl text-lime-800 cursor-pointer' ><PiInfo/></p>
             </div>
+            ) : (
+              <p onClick={() => openProfile(Element.id)} className='text-xl text-lime-800 cursor-pointer' ><PiInfo/></p>
+            ) }
           </div>
         ))}
       </main>
