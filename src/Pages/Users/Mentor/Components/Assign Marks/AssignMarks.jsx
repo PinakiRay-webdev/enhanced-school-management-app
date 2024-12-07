@@ -32,7 +32,7 @@ const AssignMarks = ({marksBox , setMarksBox , studentID}) => {
         }).then(()=>{
             const existingMarks = selectedStudent?.Marks || {}
             const assignedMarks = {
-                ...existingMarks,
+                ...existingMarks,   
                 [data.term] : data.mark
             }
             const updatedStudent = {
