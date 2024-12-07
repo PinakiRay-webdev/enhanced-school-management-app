@@ -230,26 +230,32 @@ const AddUsers = () => {
         )}
 
 {selectedRole === "student" && (
-          <div>
-            <label>Course</label>
-            <br />
-            <input
-              {...register("course", {
-                required: {
-                  value: true,
-                  message: "this field is required",
-                },
-              })}
-              className="w-full ring-1 ring-green-500 py-1 px-2 rounded-md outline-none mt-2"
-              type="text"
-              placeholder="example"
-            />
-            {errors.course && (
-              <p className="text-red-500 font-semibold mt-2 text-xs">
-                {errors.course.message}
-              </p>
-            )}
-          </div>
+        <div>
+        <label>Course</label>
+        <br />
+        <select
+          {...register("course", {
+            required: {
+              value: true,
+              message: "this field is required",
+            },
+          })}
+          className="w-full ring-1 ring-green-500 py-2 px-2 rounded-md outline-none mt-2"
+        >
+          <option value="">Select a course</option>{" "}
+          {/* Add an empty option for default */}
+          <option value="aws">aws</option>
+          <option value="java">java</option>
+          <option value="javascript">javascript</option>
+          <option value="python">python</option>
+          <option value="c++">c++</option>
+        </select>
+        {errors.course && (
+          <p className="text-xs text-red-500 font-semibold mt-2">
+            {errors.course.message}
+          </p>
+        )}
+      </div>
         )}
 
         <button className="bg-green-700 absolute bottom-2 px-4 py-1 text-white rounded-md right-4">
