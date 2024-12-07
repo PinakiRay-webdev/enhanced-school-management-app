@@ -17,6 +17,7 @@ import EditUsers from "./Pages/Users/Admin/Components/Edit Users/EditUsers";
 import StudentSidebar from "./Pages/Users/Student/components/SideBar/StudentSideBar";
 import MentorSidebar from "./Pages/Users/Mentor/Components/Side bar/MentorSideBar";
 import StudentEditProfile from "./Pages/Users/Student/Pages/EditProfile/StudentEditProfile";
+import MentorDashboard from "./Pages/Users/Mentor/Pages/Dashboard/MentorDashboard";
 
 const App = () => {
   const endPoints = createBrowserRouter([
@@ -94,7 +95,7 @@ const App = () => {
         <>
           <Navbar />
           <MentorSidebar />
-          <StudentDashboard />
+          <MentorDashboard />
         </>
       ),
     },
