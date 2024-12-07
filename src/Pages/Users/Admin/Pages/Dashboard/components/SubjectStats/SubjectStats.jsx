@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { useSelector, useDispatch } from "react-redux";
 import { getStudents } from "../../../../../../../redux/slice/UserSlice";
@@ -8,30 +8,30 @@ const SubjectStats = () => {
   const studentData = useSelector((state) => state.users.students);
   const dispatch = useDispatch();
 
-  const calculateSubjectCounts = () => {
-    const counts = {
-      aws: 0,
-      java: 0,
-      python: 0,
-      javascript: 0,
-      c: 0,
-    };
-
-    studentData?.forEach((student) => {
-      if (counts[student.Course] !== undefined) {
-        counts[student.Course]++;
-      }
-    });
-
-    setSubjectCounts(counts);
-  };
+  useEffect(() => {
+    // Fetch students data only once when the component mounts
+    dispatch(getStudents());
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getStudents()).then(() => calculateSubjectCounts());
-  }, [dispatch, studentData]);
+    // Calculate counts when studentData changes
+    if (studentData?.length) {
+      const counts = studentData.reduce(
+        (acc, student) => {
+          if (acc[student.Course] !== undefined) {
+            acc[student.Course]++;
+          }
+          return acc;
+        },
+        { aws: 0, java: 0, python: 0, javascript: 0, c: 0 }
+      );
+
+      setSubjectCounts(counts);
+    }
+  }, [studentData]);
 
   return (
-    <div>
+    <div className="bg-white my-2 mx-4 rounded-lg" >
       <BarChart
         xAxis={[
           {

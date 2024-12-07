@@ -22,15 +22,9 @@ const StudentList = () => {
   JSON.parse(localStorage.getItem("adminCredentials")) ||
   JSON.parse(localStorage.getItem('mentorCredentials'))
 
-  const getStudentData = useCallback(()=>{
-    dispatch(getStudents())
-  },[dispatch])
-
   useEffect(()=>{
-    getStudentData()
-  },[getStudentData])
-
-
+    dispatch(getStudents())
+  },[ dispatch])
 
   const openDeleteBox = (studentID) =>{
     setStudentID(studentID)
