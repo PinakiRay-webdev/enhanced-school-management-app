@@ -34,7 +34,7 @@ const AddUsers = () => {
       DOB : "",
       Gender : "",
       Phone : "",
-      Adress : "",
+      Address : "",
       City : "",
       State : "",
       PinCode : "",
