@@ -38,13 +38,6 @@ const AddUsers = () => {
       City : "",
       State : "",
       PinCode : "",
-      Marks : {
-        "Term 1" : "",
-        "Term 2" : "",
-        "Term 3" : "",
-        "Term 4" : "",
-        "Term 5" : "",
-      }
     };
 
     const newMentor = {

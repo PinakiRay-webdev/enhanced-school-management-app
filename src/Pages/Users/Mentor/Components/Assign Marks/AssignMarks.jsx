@@ -1,10 +1,11 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { IoIosCloseCircle } from "react-icons/io";
-import { useSelector , useDispatch } from 'react-redux';
-import { ToastContainer , toast } from 'react-toastify'
+import { useSelector} from 'react-redux';
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { editStudent } from '../../../../../redux/slice/UserSlice';
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../../../../utils/firebase/firebase-config';
+import { data } from 'autoprefixer';
 
 const AssignMarks = ({marksBox , setMarksBox , studentID}) => {
 
@@ -17,36 +18,46 @@ const AssignMarks = ({marksBox , setMarksBox , studentID}) => {
     } = useForm()
 
     const selectedStudent = useSelector((state) => state.users.students.find((e) => e.id === studentID))
-    const dispatch = useDispatch()
 
     const closeForm = () =>{
         setMarksBox('scale-0')
     }
 
     const onSubmit = async (data) =>{
-        toast.loading('submitting marks...' , {theme : 'dark'})
-        await new Promise((resolve)=>{
-            setTimeout(()=>{
-                resolve()
-            },1500)
-        }).then(()=>{
-            const existingMarks = selectedStudent?.Marks || {}
-            const assignedMarks = {
-                ...existingMarks,   
-                [data.term] : data.mark
+        toast.loading('Assinging.....' , {theme : 'dark'})
+        try {
+            await new Promise((resolve) =>{
+                setTimeout(()=>{
+                    resolve()
+                },1500)
+            })
+            const marks = {
+                term : data.term,
+                mark : data.mark
             }
-            const updatedStudent = {
-                ...selectedStudent,
-                Marks : assignedMarks
+            const studentRef = doc(db , "student marks" , studentID)
+            const studentSnap = await getDoc(studentRef);
+
+            if(studentSnap.exists()){
+                await updateDoc(studentRef , {
+                    terms : arrayUnion(marks)
+                })
+            } else {
+                await setDoc(studentRef , {
+                    studentID : studentID,
+                    terms : [marks]
+                })
             }
 
-            dispatch(editStudent(updatedStudent))
-            toast.dismiss()
-            toast.success('marks assigned successfully' , {theme : 'dark'})
+            toast.dismiss();
+            toast.success('Marks assigned successfully' , {theme : 'dark'})
             reset()
             closeForm()
-        })
-    }
+        } catch (error) {
+            toast.dismiss();
+            toast.error(error.message , {theme : 'dark'})
+        }
+    } 
 
 
     setValue('term' , "")
@@ -93,11 +104,11 @@ const AssignMarks = ({marksBox , setMarksBox , studentID}) => {
                     message : 'select the term'
                 }
             })} className='w-full ring-1 ring-green-700 py-2 px-3 rounded-md my-2 outline-none ' >
-                <option>Term 1</option>
-                <option>Term 2</option>
-                <option>Term 3</option>
-                <option>Term 4</option>
-                <option>Term 5</option>
+                <option value="term1" >Term 1</option>
+                <option value="term2" >Term 2</option>
+                <option value="term3" >Term 3</option>
+                <option value="term4" >Term 4</option>
+                <option value="term5" >Term 5</option>
             </select>
             {errors.term && <p className='text-xs font-semibold text-red-600' >{errors.term.message}</p>}
         </div>
@@ -116,7 +127,6 @@ const AssignMarks = ({marksBox , setMarksBox , studentID}) => {
         <button type='submit' className='bg-black text-white py-2 mt-6' >Assign</button>
         <button type='button' onClick={closeForm} className='bg-red-500 text-white py-2 mt-6' >Close</button>
       </form>
-      {/* <ToastContainer/> */}
     </div>
   )
 }
