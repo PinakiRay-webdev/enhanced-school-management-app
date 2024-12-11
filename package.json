@@ -17,6 +17,7 @@
     "@mui/x-charts": "^7.23.1",
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
+    "firebase": "^11.0.2",
     "json-server": "^1.0.0-beta.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
