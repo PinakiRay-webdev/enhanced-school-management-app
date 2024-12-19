@@ -3,9 +3,9 @@ import React from 'react'
 const DataStats = () => {
   return (
 
-    <div className='flex-1 bg-white my-2 mx-4 rounded-lg' >
+    <div className='bg-white rounded-lg col-span-3 row-span-3' >
       <div>
-        
+        This is the data stats
       </div>
     </div>
   )

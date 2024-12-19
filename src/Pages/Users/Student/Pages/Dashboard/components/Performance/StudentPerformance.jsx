@@ -44,8 +44,8 @@ const StudentPerformance = () => {
   
 
   return (
-    <div>
-      <div className="bg-white rounded-md mx-3 my-2">
+    <div className="col-span-4 row-span-4 overflow-y-hidden" >
+      <div className="bg-white rounded-md mx-3 my-2 h-full">
         <BarChart
           xAxis={[
             {
@@ -55,7 +55,7 @@ const StudentPerformance = () => {
           ]}
           series={[{ data: marks }]}
           width={800}
-          height={500}
+          height={450}
         />
       </div>
     </div>

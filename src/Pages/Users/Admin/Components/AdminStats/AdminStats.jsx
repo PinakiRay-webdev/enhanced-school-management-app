@@ -30,10 +30,10 @@ const AdminStats = () => {
     },[dispatch])
 
   return (
-    <div className='grid grid-cols-4 my-2 mx-4 gap-4' >
+    <div className='grid grid-cols-4 gap-4 col-span-5 h-fit' >
 
     {admin_stats?.map((Element , id) =>(
-            <div key={id} className='bg-white rounded-md px-3 py-1 my-4 h-[8rem] relative' >
+            <div key={id} className='bg-white rounded-md px-3 py-1 mt-4 h-[8rem] relative' >
             <header className='w-full'>
               <p className={`absolute top-[-1rem] text-2xl ${Element.bgColor} w-fit text-white p-3 rounded-md`} >{<Element.icon/>}</p>
               <p className='text-right capitalize font-semibold opacity-70' >{Element.item}</p>

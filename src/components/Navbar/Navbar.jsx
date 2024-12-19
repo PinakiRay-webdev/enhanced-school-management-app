@@ -50,7 +50,7 @@ const Navbar = () => {
     }
 
   return (
-    <div className={`bg-white ${sidebarStatus ? "pl-[10vw]" : "pl-[5vw]"} transition-all duration-150 ease-in-out`} > 
+    <div className={`bg-white ${sidebarStatus ? "pl-[10vw]" : "pl-[5vw]"} h-[10vh] transition-all duration-150 ease-in-out`} > 
       <div className='py-2 flex justify-between px-4' >
         {/* left side  */}
         <div className='flex items-center gap-4'>

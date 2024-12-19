@@ -31,7 +31,7 @@ const SubjectStats = () => {
   }, [studentData]);
 
   return (
-    <div className="bg-white my-2 mx-4 rounded-lg" >
+    <div className="bg-white rounded-lg col-span-2 row-span-3 flex items-center" >
       <BarChart
         xAxis={[
           {
@@ -50,8 +50,8 @@ const SubjectStats = () => {
             ],
           },
         ]}
-        width={400}
-        height={300}
+        width={450}
+        height={400}
       />
     </div>
   );

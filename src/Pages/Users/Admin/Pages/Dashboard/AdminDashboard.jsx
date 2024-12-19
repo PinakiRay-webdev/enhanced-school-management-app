@@ -11,12 +11,10 @@ const AdminDashboard = () => {
   const sidebarStatus = useSelector((state) => state.sidebar.isOpen)
 
   return (
-    <div className={`${sidebarStatus ? "pl-[10vw]" : "pl-[5vw]"} transition-all duration-150 ease-in-out`} >
+    <div className={`${sidebarStatus ? "pl-[10vw]" : "pl-[6vw]"} py-4 px-5 h-[90vh] transition-all duration-150 ease-in-out grid grid-cols-5 grid-rows-4 gap-3`} >
       <AdminStats/>
-      <div className='flex' >
       <DataStats/>
       <SubjectStats/>
-      </div>
     </div>
   )
 }
